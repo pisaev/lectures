@@ -1,0 +1,122 @@
+mkdir demo
+cd demo
+git status
+
+#in split window
+cd demo
+watch -n 1 tree . -a
+
+#basic stracture
+mkdir .git
+mkdir .git/objects
+mkdir .git/refs
+mkdir .git/refs/heads (branches)
+
+echo "ref: refs/heads/master" > .git/HEAD
+
+#example of help
+git help hash-object
+
+#create blob
+echo "my cool text" | git hash-object --stdin -w
+
+#all is "virtual", git is just KV DB
+#mention packed objects
+
+#show blob
+git cat-file -p df9c
+git cat-file -t df9c
+git cat-file -s df9c
+
+git status 
+
+#stage file
+git update-index --add --cacheinfo 100644 df9cbbc77bff9f2f0354d20455699f7c9fefc7b2 first.txt
+
+git status
+
+#show no file
+ls -la
+
+#create tree
+git write-tree
+
+git cat-file -s 181b7b90325848cf0f2b8e66bdda6b930438632d
+git cat-file -p 181b7b90325848cf0f2b8e66bdda6b930438632d
+git cat-file -t 181b7b90325848cf0f2b8e66bdda6b930438632d
+
+#create commit
+git commit-tree 181b7b90325848cf0f2b8e66bdda6b930438632d -m "My first commit"
+git cat-file -p 9dfa91c082f9a59865072d98257044bdd6446460
+
+echo 9dfa91c082f9a59865072d98257044bdd6446460 > .git/refs/heads/master
+git status
+git log
+
+git show
+
+#generate the actual file
+git checkout HEAD -- first.txt
+
+#explain --
+
+# porcelain vs plumbing 
+
+#in split window
+watch --color -n 1 git log --graph --decorate --all --color 
+
+echo "another cool text" > second.txt
+git add .
+git commit -m "Second"
+
+git branch paveli/demo HEAD
+echo "more awesome text" >> second.txt
+cat second.txt
+git diff
+
+git add .
+git commit -m "Add awesomeness"
+git checkout paveli/demo
+vi second.txt (more stuff)
+git add .
+git commit -m "More stuff"
+
+git checkout master
+git merge paveli/demo
+
+#conflicts
+git status
+vi second.txt
+#resolve conflicts
+git status
+git add .
+git status
+git commit
+
+tree .git
+
+git reset --hard 22fd9eebb5156b02994db30fe8f78b3a32833965 (before merge on master)
+#talk about --soft --mixed
+
+git reflog #everything that change references
+
+#bring merge commit back
+git reset --hard 709b1cd
+#or
+git reset --hard HEAD@{1}
+
+#rebase
+git checkout paveli/demo
+git rebase master
+git status
+vi second.txt
+#resolve conflicts
+git add .
+git commit
+git rebase --continue
+
+#add some commits
+i=0
+while [ $i -ge 0 ]; do echo "text_$i" >> second.txt; git add .; git commit -m "Text $i"; i=$(( $i - 1 )); done
+
+git rebase -i HEAD~10
