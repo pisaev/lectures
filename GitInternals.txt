@@ -146,3 +146,5 @@ while [ $i -ge 0 ]; do echo "text_$i" >> second.txt; git add .; git commit -m "T
 
 git rebase -i HEAD~10
 
+git revert HEAD
+git cherry-pick HEAD~3
