@@ -135,8 +135,14 @@ git add .
 git commit
 git rebase --continue
 
+#modifying lest commit
+#add more text  
+git commit --amend
+
+
 #add some commits
 i=10
 while [ $i -ge 0 ]; do echo "text_$i" >> second.txt; git add .; git commit -m "Text $i"; i=$(( $i - 1 )); done
 
 git rebase -i HEAD~10
+
