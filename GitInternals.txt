@@ -21,7 +21,7 @@ git help hash-object
 echo "my cool text" | git hash-object --stdin -w
 
 #all is "virtual", git is just KV DB
-#mention packed objects
+#mention packed objects and "git gc"
 
 #show blob
 git cat-file -p df9c
