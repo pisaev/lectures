@@ -98,8 +98,22 @@ tree .git
 git reset --hard 22fd9eebb5156b02994db30fe8f78b3a32833965 (before merge on main)
 #talk about --soft --mixed
 
-git reflog #everything that change references
+git reflog #everything that changes references
+================================================
+`git reflog` is a command used to access the reference log, a mechanism in Git that tracks changes to branch pointers and HEAD. It's a valuable tool for understanding the history of what has happened in a repository, beyond just the commit history.
 
+Here's a short explanation:
+
+- **What It Shows**: `git reflog` shows a log of where the HEAD and other references used to be. It includes actions like commits, checkouts, resets, and rebase operations.
+  
+- **Recovering Lost Commits**: If you've accidentally deleted a branch, reset a commit, or made other drastic changes, `git reflog` can help you find the "lost" references, allowing you to return to a previous state of your project. 
+  
+- **Structure**: Each entry in the reflog includes the old commit reference, the new commit reference, what operation caused the change, and a timestamp.
+
+- **Scope**: By default, it operates on the current branch's reflog, but you can specify other branches or references to view their individual reflogs.
+
+In essence, `git reflog` is like a safety net, providing a detailed audit trail of all the movements in the repository. It's particularly useful when troubleshooting or trying to recover from an unintended alteration of the repository's history.
+===============================================
 #bring merge commit back
 git reset --hard 709b1cd
 #or
