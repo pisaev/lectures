@@ -12,7 +12,7 @@ mkdir .git/objects
 mkdir .git/refs
 mkdir .git/refs/heads (branches)
 
-echo "ref: refs/heads/master" > .git/HEAD
+echo "ref: refs/heads/main" > .git/HEAD
 
 #example of help
 git help hash-object
@@ -49,7 +49,7 @@ git cat-file -t 181b7b90325848cf0f2b8e66bdda6b930438632d
 git commit-tree 181b7b90325848cf0f2b8e66bdda6b930438632d -m "My first commit"
 git cat-file -p 9dfa91c082f9a59865072d98257044bdd6446460
 
-echo 9dfa91c082f9a59865072d98257044bdd6446460 > .git/refs/heads/master
+echo 9dfa91c082f9a59865072d98257044bdd6446460 > .git/refs/heads/main
 git status
 git log
 
@@ -81,7 +81,7 @@ vi second.txt (more stuff)
 git add .
 git commit -m "More stuff"
 
-git checkout master
+git checkout main
 git merge paveli/demo
 
 #conflicts
@@ -95,7 +95,7 @@ git commit
 
 tree .git
 
-git reset --hard 22fd9eebb5156b02994db30fe8f78b3a32833965 (before merge on master)
+git reset --hard 22fd9eebb5156b02994db30fe8f78b3a32833965 (before merge on main)
 #talk about --soft --mixed
 
 git reflog #everything that change references
@@ -107,7 +107,7 @@ git reset --hard HEAD@{1}
 
 #rebase
 git checkout paveli/demo
-git rebase master
+git rebase main
 git status
 vi second.txt
 #resolve conflicts
